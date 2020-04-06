@@ -2,7 +2,7 @@ import React from 'react';
 import { Header } from './components/Header.js';
 import { Sidebar } from './components/Sidebar.js';
 import './scss/main.scss';
-import JobCard from './components/pages/HomePage.js';
+import HomePage from './components/pages/HomePage.js';
 import { SidebarMob } from './components/SidebarMob.js';
 
 function App() {
@@ -16,7 +16,7 @@ function App() {
           </div>
           <div class="col-sm-11 col-md-6 col-lg-9">
             <Header />
-            <JobCard />
+            <HomePage />
           </div>
         </div>
       </div>
@@ -26,7 +26,7 @@ function App() {
            {/* <div class="col-sm-12 col-md-12 col-lg-12 "> */} 
             <div className="content-area">
               <Header />
-              <JobCard />
+              <HomePage />
             </div>
         {/* </div> */}
       </div>
