@@ -19,5 +19,5 @@ export const APP=
                         icon:'fa fa-history'
                        }
                     ],
-                googleMapKey:'AIzaSyBpKbpNMuDbUQtqYCSgZnH29nYXv0koKzA',
+                googleMapKey:'',
             }
