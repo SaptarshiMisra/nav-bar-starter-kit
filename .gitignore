@@ -11,6 +11,9 @@
 # production
 /build
 
+#security files
+src/Apikey.js
+
 # misc
 .DS_Store
 .env.local

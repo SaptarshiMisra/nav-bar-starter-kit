@@ -1,6 +1,6 @@
 import React , {useState} from 'react';
 import { Card, Nav, Button, } from 'react-bootstrap'
-
+import Map from '../Map.js';
 
 const HomePage = () => {
     const data = [{
@@ -54,13 +54,7 @@ const HomePage = () => {
             </Card.Header>
             <Card.Body>
                 {(selectedNav.item === 'Location'?
-                    <div className="text">
-                        <Card.Title>Welcome to Location</Card.Title>
-                        <Card.Text>
-                            {selectedNav.titleDesc} 
-                        </Card.Text>
-                        <Button variant="primary">{selectedNav.actionName}</Button>
-                    </div>
+                    <Map />
                 :
                     <div className="text">
                         <Card.Title>{selectedNav.title}</Card.Title>
