@@ -1,6 +1,8 @@
 import React, { useState, useEffect } from "react";
 import ReactDOM from "react-dom";
 import {AppTitle} from './AppTitle.js'
+import {MenuMob} from './MenuMob.js';
+
 
 export const SidebarMob = () => {
     const [open, setOpen] = useState(false);
@@ -49,17 +51,12 @@ export const SidebarMob = () => {
             {/* for mobile view */}
             <AppTitle />
             <div onClick={() => setOpen(!open)} className="hamburger" style={animStyle}>
-                
+
                 <div className="line"></div>
                 <div className="line"></div>
                 <div className="line"></div>
             </div>
-            <ul  className={open ? "nav-links open" : "nav-links"}>
-                <li className={open ? "fade" : ""} ><a href="#" className="active"><span><i className="fa fa-home" aria-hidden="true"></i></span>Home</a></li>
-                <li className={open ? "fade" : ""} ><a href="#"><span><i className="fa fa-user" aria-hidden="true"></i></span>Profile</a></li>
-                <li className={open ? "fade" : ""} ><a href="#"><span><i className="fa fa-cog" aria-hidden="true"></i></span>Settings</a></li>
-                <li className={open ? "fade" : ""} ><a href="#"><span><i className="fa fa-history" aria-hidden="true"></i></span>History</a></li>
-            </ul>
+            <MenuMob open={open}/>
         </nav>
     )
 }
