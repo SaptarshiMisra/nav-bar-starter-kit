@@ -20,16 +20,15 @@ function App() {
           </div>
         </div>
       </div>
-      <div id="mobView">
-           <SidebarMob />
-        {/* <div class="row">
-          <div class="col-sm-12 col-md-12 col-lg-12 "> */}
+        <div id="mobView">
+            <SidebarMob />
+        
+           {/* <div class="col-sm-12 col-md-12 col-lg-12 "> */} 
             <div className="content-area">
               <Header />
               <JobCard />
             </div>
-          {/* </div>
-        </div> */}
+        {/* </div> */}
       </div>
     </div>
   );
