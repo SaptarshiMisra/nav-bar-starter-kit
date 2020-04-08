@@ -1,0 +1,32 @@
+{
+    "jobs": [
+        {
+            "nav": [
+                {
+                    "navName": "Job Details",
+                    "linkId": "",
+                    "disabled": false,
+                    "title": " Job Details",
+                    "titleDesc": "You have to work as your supervisor says. 8 hours a day ",
+                    "actionName": "Apply"
+                },
+                {
+                    "navName": "Location",
+                    "linkId": "",
+                    "disabled": true,
+                    "title": "Sample Job Details",
+                    "titleDesc": "5 kms from your place ",
+                    "actionName": "Apply"
+                },
+                {
+                    "navName": "Salary",
+                    "linkId": "",
+                    "disabled": false,
+                    "title": " Salary Details",
+                    "titleDesc": "Salary : 8000 ",
+                    "actionName": "Apply"
+                }
+            ]
+        }
+    ]
+}

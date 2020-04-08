@@ -3,38 +3,14 @@ import { Card, Nav, Button, } from 'react-bootstrap'
 import Map from '../Map.js';
 import { Header } from '../Header.js';
 import { Link } from 'react-router-dom';
+import {useSelector} from 'react-redux';
+
 
 const HomePage = (props) => {
-    const data = [{
-        nav:[
-             {
-                navName:'Job Details',
-                linkId:'',
-                disabled: false,
-                title:' Job Details',
-                titleDesc:'You have to work as your supervisor says. 8 hours a day ',
-                actionName:'Apply'
-             },
-             {
-                navName:'Location',
-                linkId:'',
-                disabled: true,
-                title:'Sample Job Details',
-                titleDesc:'5 kms from your place ',
-                actionName:'Apply'
-            },
-            {
-                navName:'Salary',
-                linkId:'',
-                disabled: false,
-                title:' Salary Details',
-                titleDesc:'Salary : 8000 ',
-                actionName:'Apply'
-            }   
-        ],
-        
-    }][0];
-    const [navs,setNavs] = useState(data.nav);
+    const jobsReducer = useSelector(state => state.jobsReducer);
+    const navs = jobsReducer[0].nav;
+
+    // const [navs,setNavs] = useState(data.nav);
     const [selectedNav, setSelectedNav] = useState(navs[0]);
     const onChangeTab = (index) =>{
         setSelectedNav(navs[index]);
