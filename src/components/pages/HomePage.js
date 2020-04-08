@@ -8,7 +8,7 @@ const HomePage = (props) => {
     const data = [{
         nav:[
              {
-                item:'Job Details',
+                navName:'Job Details',
                 linkId:'',
                 disabled: false,
                 title:' Job Details',
@@ -16,15 +16,15 @@ const HomePage = (props) => {
                 actionName:'Apply'
              },
              {
-                item:'Location',
+                navName:'Location',
                 linkId:'',
-                disabled: false,
+                disabled: true,
                 title:'Sample Job Details',
-                titleDesc:'Loreum ',
+                titleDesc:'5 kms from your place ',
                 actionName:'Apply'
             },
             {
-                item:'Salary',
+                navName:'Salary',
                 linkId:'',
                 disabled: false,
                 title:' Salary Details',
@@ -39,13 +39,6 @@ const HomePage = (props) => {
     const onChangeTab = (index) =>{
         setSelectedNav(navs[index]);
     }
-    const handleSubmit = (e) => {
-        e.preventDefault();
-        console.log('clicked- submit');
-        let path = `/Profile`;
-        // let history = useHistory();
-        // history.push(path);
-    }
 
     return (
         <div>
@@ -58,7 +51,7 @@ const HomePage = (props) => {
                             navs.map((nav,index) =>
                                 <Nav.Item>
                                     <Nav.Link eventKey={index} disabled={nav.disabled} href={nav.linkId} >
-                                        {nav.item}
+                                        {nav.navName}
                                     </Nav.Link>
                                 </Nav.Item>
                             )
@@ -69,21 +62,19 @@ const HomePage = (props) => {
                     {(selectedNav.item === 'Location'?
                         <Map />
                     :
-                        <form>
-                            <div className="text">
-                                <Card.Title>{selectedNav.title}</Card.Title>
-                                <Card.Text>
-                                    {selectedNav.titleDesc} 
-                                </Card.Text>
-                                <Link to={{
-                                            pathname:'/apply',
-                                            job :selectedNav
-                                        }} className="btn btn-primary">
-                                            {selectedNav.actionName}
-                                </Link>
-                                {/* <Button onClick ={handleSubmit} variant="primary">{selectedNav.actionName}</Button> */}
-                            </div>
-                        </form>
+                        <div className="text">
+                            <Card.Title>{selectedNav.navName}</Card.Title>
+                            <Card.Text>
+                                {selectedNav.titleDesc} 
+                            </Card.Text>
+                            <Link to={{
+                                        pathname:'/apply',
+                                        job :navs
+                                    }} className="btn btn-primary">
+                                        {selectedNav.actionName}
+                            </Link>
+                            {/* <Button onClick ={handleSubmit} variant="primary">{selectedNav.actionName}</Button> */}
+                        </div>
                     )}
                 </Card.Body>
             </Card>
