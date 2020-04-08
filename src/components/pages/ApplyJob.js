@@ -16,8 +16,8 @@ export const ApplyJob = (props) => {
             location = data[1].titleDesc;
         }
         return (
-            <div>
-                <h1> Going to Apply for the below job</h1>
+            <div style={{height:'100vh'}}>
+            <h1> Going to Apply for the below job</h1>
                 <hr/>
                 <div>
                     <div>Job Detail: {jobDetail}</div>

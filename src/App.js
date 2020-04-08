@@ -15,7 +15,7 @@ function App() {
     <div className=" container-fluid">
       <div id="deskTopView">
         <div class="row">
-          <div  id="sideBar" class="col col-sm-1 col-md-6 col-lg-3 " style={{height:'100%' }}>
+          <div  id="sideBar" class="col col-sm-1 col-md-6 col-lg-3 ">
             <Sidebar />
           </div>
           <div class="col-sm-11 col-md-6 col-lg-9">
