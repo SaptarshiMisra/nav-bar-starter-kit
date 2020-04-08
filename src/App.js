@@ -1,11 +1,15 @@
-import React from 'react';
-import { Header } from './components/Header.js';
+import React , {useState} from 'react';
 import { Sidebar } from './components/Sidebar.js';
 import './scss/main.scss';
-import HomePage from './components/pages/HomePage.js';
+import Routes from "./Routes";
+
 import { SidebarMob } from './components/SidebarMob.js';
 
 function App() {
+  const [isAuthenticated, userHasAuthenticated] = useState(false);
+  function handleLogout() {
+    userHasAuthenticated(false);
+  }
   return (
 
     <div className=" container-fluid">
@@ -15,20 +19,15 @@ function App() {
             <Sidebar />
           </div>
           <div class="col-sm-11 col-md-6 col-lg-9">
-            <Header />
-            <HomePage />
+            <Routes appProps={{ isAuthenticated, userHasAuthenticated }} />
           </div>
         </div>
       </div>
         <div id="mobView">
             <SidebarMob />
-        
-           {/* <div class="col-sm-12 col-md-12 col-lg-12 "> */} 
-            <div className="content-area">
-              <Header />
-              <HomePage />
-            </div>
-        {/* </div> */}
+              <div className="content-area">
+                <Routes appProps={{ isAuthenticated, userHasAuthenticated }} />
+              </div>
       </div>
     </div>
   );
