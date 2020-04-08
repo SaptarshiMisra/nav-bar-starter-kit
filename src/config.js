@@ -20,5 +20,5 @@ export const APP=
                         icon:'fa fa-history'
                        }
                     ],
-                googleMapKey:GOOGLE_API_KEY,
+                googleMapKey:GOOGLE_API_KEY
             }
