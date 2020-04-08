@@ -1,3 +1,4 @@
+import GOOGLE_API_KEY from './ApiKey.js';
 export const APP=
             {
                 name:'Daily Jobs',
@@ -19,5 +20,5 @@ export const APP=
                         icon:'fa fa-history'
                        }
                     ],
-                googleMapKey:'',
+                googleMapKey:GOOGLE_API_KEY
             }
