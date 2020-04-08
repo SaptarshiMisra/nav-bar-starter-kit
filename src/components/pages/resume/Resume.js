@@ -2,22 +2,30 @@ import React, { Component } from 'react';
 import './resume.css';
 import { Card, Nav, Button, } from 'react-bootstrap'
 
-class Resume extends Component {
-    render() {
-        if (this.props.data) {
-            var education = this.props.data.education.map(function (edu) {
-                return <div key={edu.school} className="row item" >
-                    <div className="twelve columns">
-                        <span>SCHOOL<h3>{edu.school}</h3></span>
-                        <p className="info">{edu.degree} <span>&bull;</span> <em className="date">{edu.graduated}</em></p>
-                        <p>
-                            {edu.description}
-                        </p>
-                    </div>
+import { useSelector, useDispatch } from "react-redux";
+import { editResume } from "../../../actions";
+
+const Resume = (props) => {
+    let education='';
+    let work='';
+    let skills='';
+
+    const dispatch = useDispatch();
+
+    if(props.data) {
+        education= props.data.education.map(function (edu) {
+            return <div key={edu.school} className="row item" >
+                <div className="twelve columns">
+                    <span>SCHOOL<h3>{edu.school}</h3></span>
+                    <p className="info">{edu.degree} <span>&bull;</span> <em className="date">{edu.graduated}</em></p>
+                    <p>
+                        {edu.description}
+                    </p>
                 </div>
+            </div>
             });
 
-            var work = this.props.data.work.map(function (job) {
+            work = props.data.work.map(function (job) {
                 return <div key={job.company} className="row item">
                     <div className="twelve columns">
                         <h3>{job.company}</h3>
@@ -28,13 +36,14 @@ class Resume extends Component {
                         </p>
                     </div>
                 </div>
-            });
+                });
 
-            var skills = this.props.data.skills.map(function (skill) {
+            skills = props.data.skills.map(function (skill) {
                 var className = 'bar-expand ' + skill.name.toLowerCase();
                 return <li key={skill.name}><span style={{ width: skill.level }} className={className}></span><em>{skill.name}</em></li>
             });
-        }
+    }
+
         return (
             <div>
                 {/* <Card>
@@ -65,6 +74,7 @@ class Resume extends Component {
 
 
                 <section id="resume">
+                    <div> <Button onClick={()=>dispatch(editResume())}>Edit Resume</Button></div>
                 <div className="row education">
                     <div className="three columns header-col">
                         <h1><span>Education</span></h1>
@@ -104,6 +114,6 @@ class Resume extends Component {
 
         );
     }
-}
+
 
 export default Resume;

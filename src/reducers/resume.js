@@ -6,8 +6,13 @@ const resumeReducer = (state={resume}, action)=>{
             return resume;
         case 'SAVE_RESUME':
             return {};
+        case 'EDIT_RESUME':
+            return {
+                ...state,
+                resumeReducer: state.education.pop(state.education[0])
+            };        
         default:
-            return resume;
+        return resume;
     }
 }
 export default resumeReducer;
