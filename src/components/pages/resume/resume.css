@@ -1,0 +1,145 @@
+.row .one         { width: 8.33333%; }
+.row .two         { width: 16.66667%; }
+.row .three       { width: 20%; }
+.row .four        { width: 33.33333%; }
+.row .five        { width: 41.66667%; }
+.row .six         { width: 50%; }
+.row .seven       { width: 58.33333%; }
+.row .eight       { width: 66.66667%; }
+.row .nine        { width: 75%; }
+.row .ten         { width: 83.33333%; }
+.row .eleven      { width: 91.66667%; }
+.row .twelve      { width: 100%; }
+
+
+#resume {
+    background: #fff;
+    padding: 20px;
+    padding-bottom: 72px;
+    overflow: hidden;
+ }
+ 
+ #resume a, #resume a:visited  { color: #11ABB0; }
+ #resume a:hover, #resume a:focus { color: #313131; }
+ 
+ #resume h1 {
+    font: 18px/24px 'opensans-bold', sans-serif;
+    text-transform: uppercase;
+    letter-spacing: 1px;
+ }
+ #resume h1 span {
+    border-bottom: 3px solid #11ABB0;
+    padding-bottom: 6px;
+ }
+ #resume h3 {
+    font: 25px/30px 'opensans-bold', sans-serif;
+ }
+ 
+ #resume .header-col { padding-top: 9px;  }
+ #resume .main-col { padding-right: 10%; }
+ 
+ .education, .work {
+    margin-bottom: 48px;
+    padding-bottom: 24px;
+    border-bottom: 1px solid #E8E8E8;
+ }
+ #resume .info {
+    font: 16px/24px 'librebaskerville-italic', serif;
+    color: #121212;
+    margin-bottom: 18px;
+    margin-top: 9px;
+ }
+ #resume .info span {
+    margin-right: 5px;
+    margin-left: 5px;
+ }
+ #resume .date {
+    font: 15px/24px 'opensans-regular', sans-serif;
+    margin-top: 6px;
+ }
+
+ .bars {
+	width: 95%;
+	float: left;
+	padding: 0;
+	text-align: left;
+}
+.bars .skills {
+  	margin-top: 36px;
+   list-style: none;
+}
+.bars li {
+   position: relative;
+  	margin-bottom: 60px;
+  	background: #ccc;
+  	height: 42px;
+  	border-radius: 3px;
+}
+.bars li em {
+	font: 15px 'opensans-bold', sans-serif;
+   color: #313131;
+	text-transform: uppercase;
+   letter-spacing: 2px;
+	font-weight: normal;
+   position: relative;
+	top: -36px;
+}
+.bar-expand {
+   position: absolute;
+   left: 0;
+   top: 0;
+
+   margin: 0;
+   padding-right: 24px;
+  	background: #313131;
+   display: inline-block;
+  	height: 42px;
+   line-height: 42px;
+   border-radius: 3px 0 0 3px;
+}
+
+.photoshop {
+  	-moz-animation: photoshop 2s ease;
+  	-webkit-animation: photoshop 2s ease;
+}
+.illustrator {
+  	-moz-animation: illustrator 2s ease;
+  	-webkit-animation: illustrator 2s ease;
+}
+.photography {
+  	-moz-animation: photography 2s ease;
+  	-webkit-animation: photography 2s ease;
+}
+.branding {
+  	-moz-animation: branding 2s ease;
+  	-webkit-animation: branding 2s ease;
+}
+.eduction {
+  	-moz-animation: education 2s ease;
+  	-webkit-animation: education 2s ease;
+}
+
+@media only screen and (max-width: 600px) {
+    .row{
+        flex-direction:column;
+        margin-left: 1px !important;        
+    }
+    .item{
+        margin-left: 1px;
+    }
+    #resume .main-col {
+        padding-right: 1%;
+    }
+    .row .nine {
+        width: 90%;
+    }
+    .h1, .h2, .h3, .h4, .h5, .h6, h1, h2, h3, h4, h5, h6 {
+        margin-bottom: 1.5rem;
+        font-weight: 500;
+        line-height: 1.2;
+    }
+    #resume .header-col {
+        /* padding-top: 9px; */
+        padding-bottom: 2rem;
+    }
+}

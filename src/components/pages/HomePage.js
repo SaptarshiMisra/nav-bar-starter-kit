@@ -41,7 +41,7 @@ const HomePage = (props) => {
     }
 
     return (
-        <div>
+        <div style={{height:'100vh'}}>
             <Header />
 
             <Card>
@@ -78,6 +78,7 @@ const HomePage = (props) => {
                     )}
                 </Card.Body>
             </Card>
+            
         </div>
         
     )
