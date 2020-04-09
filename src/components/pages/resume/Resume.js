@@ -1,4 +1,4 @@
-import React, { Component } from 'react';
+import React, { useState,Component,useEffect } from 'react';
 import './resume.css';
 import { Card, Nav, Button, } from 'react-bootstrap'
 
@@ -6,14 +6,21 @@ import { useSelector, useDispatch } from "react-redux";
 import { editResumeDeleteSchool, editResumeAddSchool, editResumeEditSchool } from "../../../actions";
 import { School } from './school.js';
 import { Switch } from 'react-router';
-
+import { Link } from 'react-router-dom';
 
 const Resume = (props) => {
     let education = '';
     let work = '';
     let skills = '';
     let educations = props.data.education;
-
+    educations=educations.map((each,index)=> {
+        each.index = index;
+        return each;
+    });
+    const [edu, setEdu] = useState(educations);
+    useEffect(() => {
+        setEdu(educations);
+    }, [])
     const dispatch = useDispatch();
     const onChangeTab = (key) =>{
         let eventKey = key.split("-");
@@ -21,31 +28,45 @@ const Resume = (props) => {
             case "DELETE":
                 dispatch(editResumeDeleteSchool(educations[eventKey[1]]));
                 break;
-        
+            case "UPDATE":
+                dispatch(editResumeEditSchool(edu));
+                break;
             default:
                 break;
         }
     }
     if (props.data) {
-        education = educations.map(function (edu,index) {
+        education = educations.map(function (education,index) {
             let editEventKey = 'EDIT-'+index
             let deleteEventKey = 'DELETE-'+index
-            return  <Card key={index}>
-                <Card.Header>
-                    <Nav variant="tabs" onSelect={onChangeTab}>
-                        <Nav.Item>
-                            <Nav.Link eventKey={editEventKey} href="#link">Edit</Nav.Link>
-                        </Nav.Item>
-                        <Nav.Item>
-                            <Nav.Link eventKey={deleteEventKey}> Delete </Nav.Link>
-                        </Nav.Item>
-                    </Nav>
-                </Card.Header>
+            return  <div>
+                <Card key={index}>
+                        <Card.Header>
+                            <Nav variant="tabs" onSelect={onChangeTab}>
+                                <Nav.Item>
+                                    <Link  
+                                        to={{
+                                            pathname:'/editschool',
+                                            education :education
+                                        }}
+                                        eventKey={editEventKey} href="/edit"
+                                        className="nav-link"
+                                    >
+                                        Edit
+                                    </Link>
+                                </Nav.Item>
+                                <Nav.Item>
+                                    <Nav.Link eventKey={deleteEventKey}> Delete </Nav.Link>
+                                </Nav.Item>
+                            </Nav>
+                        </Card.Header>
 
-                <Card.Body>
-                    <School edu={edu} />
-                </Card.Body>
+                        <Card.Body>
+                            <School edu={education} />
+                        </Card.Body>
             </Card>
+            <br/>
+            </div>
 
         });
 
@@ -70,40 +91,15 @@ const Resume = (props) => {
 
     return (
         <div>
-            {/* <Card>
-                    <Card.Header>
-                        <Nav variant="tabs" defaultActiveKey="#first">
-                            <Nav.Item>
-                                <Nav.Link href="#first">Active</Nav.Link>
-                            </Nav.Item>
-                            <Nav.Item>
-                                <Nav.Link href="#link">Link</Nav.Link>
-                            </Nav.Item>
-                            <Nav.Item>
-                                <Nav.Link href="#disabled" disabled>
-                                    Disabled
-                                </Nav.Link>
-                            </Nav.Item>
-                        </Nav>
-                    </Card.Header>
-
-                    <Card.Body>
-                        <Card.Title>Special title treatment</Card.Title>
-                        <Card.Text>
-                            With supporting text below as a natural lead-in to additional content.
-                        </Card.Text>
-                        <Button variant="primary">Go somewhere</Button>
-                    </Card.Body>
-                </Card> */}
-
-
             <section id="resume">
 
                 <div className="row education">
-                    <div className="three columns header-col">
+                    <div className="three columns header-col" id="education-section">
                         <h1><span>Education</span></h1>
-                      
-                        <div> <Button onClick={() => dispatch(editResumeAddSchool())}>Add </Button></div>
+                            <br />
+                            <br />
+                            <br />
+                        <div> <Button onClick={() => dispatch(editResumeAddSchool())} id="add-education">Add another </Button></div>
                         
                     </div>
 

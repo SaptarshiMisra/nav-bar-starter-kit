@@ -10,9 +10,10 @@ export const editResumeAddSchool = (payload) =>{
         payload: payload
     }
 }
-export const editResumeEditSchool = () =>{
+export const editResumeEditSchool = (payload) =>{
     return {
-        type:"EDIT_RESUME_EDIT_SCHOOL"
+        type:"EDIT_RESUME_EDIT_SCHOOL",
+        payload: payload
     }
 }
 

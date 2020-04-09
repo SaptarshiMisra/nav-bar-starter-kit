@@ -21,9 +21,14 @@ const resumeReducer = (state={resume}, action)=>{
                 resumeReducer:  state.education.push(action.payload)
             }; 
         case 'EDIT_RESUME_EDIT_SCHOOL':
+            let filteredSchoolEdit = state.education.filter(each => {
+                return each.school !== action.payload.school
+            })
+            state.education= filteredSchoolEdit
+            state.education.push(action.payload)
             return {
                 ...state,
-                resumeReducer: state.education.pop(state.education[0])
+                resumeReducer: state.education
             };            
         default:
         return resume;
