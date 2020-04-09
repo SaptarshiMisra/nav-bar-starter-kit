@@ -156,7 +156,7 @@ const Resume = (props) => {
                                         <Link  
                                             to={{
                                                 pathname:'/editskills',
-                                                skills :skills
+                                                skill :skill
                                             }}
                                             eventKey={editEventKey}
                                             className="nav-link"
