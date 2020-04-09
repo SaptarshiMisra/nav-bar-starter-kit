@@ -5,6 +5,8 @@ import { Card, Nav, Button, } from 'react-bootstrap'
 import { useSelector, useDispatch } from "react-redux";
 import { editResumeDeleteSchool, editResumeAddSchool, editResumeEditSchool } from "../../../actions";
 import { School } from './school.js';
+import { Experience } from './Experience.js';
+import { Skills } from './Skills.js';
 import { Switch } from 'react-router';
 import { Link } from 'react-router-dom';
 
@@ -49,7 +51,7 @@ const Resume = (props) => {
                                             pathname:'/editschool',
                                             education :education
                                         }}
-                                        eventKey={editEventKey} href="/edit"
+                                        eventKey={editEventKey}
                                         className="nav-link"
                                     >
                                         Edit
@@ -70,22 +72,70 @@ const Resume = (props) => {
 
         });
 
-        work = props.data.work.map(function (job) {
-            return <div key={job.company} className="row item">
-                <div className="twelve columns">
-                    <h3>{job.company}</h3>
-                    <p className="info">{job.title}<span>&bull;</span> <em className="date">{job.years}</em></p>
+        work = props.data.work.map(function (job,index) {
+            let editEventKey = 'EDIT-'+index
+            let deleteEventKey = 'DELETE-'+index
+            return <div>
+                <Card key={index}>
+                        <Card.Header>
+                            <Nav variant="tabs" onSelect={onChangeTab}>
+                                <Nav.Item>
+                                    <Link  
+                                        to={{
+                                            pathname:'/editwork',
+                                            job :job
+                                        }}
+                                        eventKey={editEventKey}
+                                        className="nav-link"
+                                    >
+                                        Edit
+                                    </Link>
+                                </Nav.Item>
+                                <Nav.Item>
+                                    <Nav.Link eventKey={deleteEventKey}> Delete </Nav.Link>
+                                </Nav.Item>
+                            </Nav>
+                        </Card.Header>
 
-                    <p>
-                        {job.description}
-                    </p>
-                </div>
+                        <Card.Body>
+                            <Experience job={job} />
+                        </Card.Body>
+            </Card>
+            <br/>
             </div>
         });
 
-        skills = props.data.skills.map(function (skill) {
-            var className = 'bar-expand ' + skill.name.toLowerCase();
-            return <li key={skill.name}><span style={{ width: skill.level }} className={className}></span><em>{skill.name}</em></li>
+        skills = props.data.skills.map(function (skill,index) {
+            let editEventKey = 'EDIT-'+index
+            let deleteEventKey = 'DELETE-'+index
+            return <div>
+                        <Card key={index}>
+                            <Card.Header>
+                                <Nav variant="tabs" onSelect={onChangeTab}>
+                                    <Nav.Item>
+                                        <Link  
+                                            to={{
+                                                pathname:'/editskills',
+                                                skills :skills
+                                            }}
+                                            eventKey={editEventKey}
+                                            className="nav-link"
+                                        >
+                                            Edit
+                                        </Link>
+                                    </Nav.Item>
+                                    <Nav.Item>
+                                        <Nav.Link eventKey={deleteEventKey}> Delete </Nav.Link>
+                                    </Nav.Item>
+                                </Nav>
+                            </Card.Header>
+
+                            <Card.Body>
+                                <Skills skill={skill} />
+                            </Card.Body>
+                        </Card>
+                        <br/>
+                    </div>
         });
     }
 
