@@ -6,11 +6,25 @@ const resumeReducer = (state={resume}, action)=>{
             return resume;
         case 'SAVE_RESUME':
             return {};
-        case 'EDIT_RESUME':
+        case 'EDIT_RESUME_DELETE_SCHOOL':
+            let filteredSchool = state.education.filter(each => {
+                return each.school !== action.payload.school
+            })
+            state.education= filteredSchool
+            return {
+                ...state,
+                resumeReducer: state.education
+            };
+        case 'EDIT_RESUME_ADD_SCHOOL':
+            return {
+                ...state,
+                resumeReducer:  state.education.push(action.payload)
+            }; 
+        case 'EDIT_RESUME_EDIT_SCHOOL':
             return {
                 ...state,
                 resumeReducer: state.education.pop(state.education[0])
-            };        
+            };            
         default:
         return resume;
     }

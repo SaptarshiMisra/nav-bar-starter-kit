@@ -3,50 +3,74 @@ import './resume.css';
 import { Card, Nav, Button, } from 'react-bootstrap'
 
 import { useSelector, useDispatch } from "react-redux";
-import { editResume } from "../../../actions";
+import { editResumeDeleteSchool, editResumeAddSchool, editResumeEditSchool } from "../../../actions";
+import { School } from './school.js';
+import { Switch } from 'react-router';
+
 
 const Resume = (props) => {
-    let education='';
-    let work='';
-    let skills='';
+    let education = '';
+    let work = '';
+    let skills = '';
+    let educations = props.data.education;
 
     const dispatch = useDispatch();
+    const onChangeTab = (key) =>{
+        let eventKey = key.split("-");
+        switch (eventKey[0]) {
+            case "DELETE":
+                dispatch(editResumeDeleteSchool(educations[eventKey[1]]));
+                break;
+        
+            default:
+                break;
+        }
+    }
+    if (props.data) {
+        education = educations.map(function (edu,index) {
+            let editEventKey = 'EDIT-'+index
+            let deleteEventKey = 'DELETE-'+index
+            return  <Card key={index}>
+                <Card.Header>
+                    <Nav variant="tabs" onSelect={onChangeTab}>
+                        <Nav.Item>
+                            <Nav.Link eventKey={editEventKey} href="#link">Edit</Nav.Link>
+                        </Nav.Item>
+                        <Nav.Item>
+                            <Nav.Link eventKey={deleteEventKey}> Delete </Nav.Link>
+                        </Nav.Item>
+                    </Nav>
+                </Card.Header>
 
-    if(props.data) {
-        education= props.data.education.map(function (edu) {
-            return <div key={edu.school} className="row item" >
+                <Card.Body>
+                    <School edu={edu} />
+                </Card.Body>
+            </Card>
+
+        });
+
+        work = props.data.work.map(function (job) {
+            return <div key={job.company} className="row item">
                 <div className="twelve columns">
-                    <span>SCHOOL<h3>{edu.school}</h3></span>
-                    <p className="info">{edu.degree} <span>&bull;</span> <em className="date">{edu.graduated}</em></p>
+                    <h3>{job.company}</h3>
+                    <p className="info">{job.title}<span>&bull;</span> <em className="date">{job.years}</em></p>
+
                     <p>
-                        {edu.description}
+                        {job.description}
                     </p>
                 </div>
             </div>
-            });
+        });
 
-            work = props.data.work.map(function (job) {
-                return <div key={job.company} className="row item">
-                    <div className="twelve columns">
-                        <h3>{job.company}</h3>
-                        <p className="info">{job.title}<span>&bull;</span> <em className="date">{job.years}</em></p>
-
-                        <p>
-                            {job.description}
-                        </p>
-                    </div>
-                </div>
-                });
-
-            skills = props.data.skills.map(function (skill) {
-                var className = 'bar-expand ' + skill.name.toLowerCase();
-                return <li key={skill.name}><span style={{ width: skill.level }} className={className}></span><em>{skill.name}</em></li>
-            });
+        skills = props.data.skills.map(function (skill) {
+            var className = 'bar-expand ' + skill.name.toLowerCase();
+            return <li key={skill.name}><span style={{ width: skill.level }} className={className}></span><em>{skill.name}</em></li>
+        });
     }
 
-        return (
-            <div>
-                {/* <Card>
+    return (
+        <div>
+            {/* <Card>
                     <Card.Header>
                         <Nav variant="tabs" defaultActiveKey="#first">
                             <Nav.Item>
@@ -73,11 +97,14 @@ const Resume = (props) => {
                 </Card> */}
 
 
-                <section id="resume">
-                    <div> <Button onClick={()=>dispatch(editResume())}>Edit Resume</Button></div>
+            <section id="resume">
+
                 <div className="row education">
                     <div className="three columns header-col">
                         <h1><span>Education</span></h1>
+                      
+                        <div> <Button onClick={() => dispatch(editResumeAddSchool())}>Add </Button></div>
+                        
                     </div>
 
                     <div className="nine columns main-col">
@@ -110,10 +137,10 @@ const Resume = (props) => {
                     </div>
                 </div>
             </section>
-            </div>
+        </div>
 
-        );
-    }
+    );
+}
 
 
 export default Resume;
