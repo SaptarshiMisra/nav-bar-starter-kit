@@ -29,7 +29,32 @@ const resumeReducer = (state={resume}, action)=>{
             return {
                 ...state,
                 resumeReducer: state.education
-            };            
+            };
+// changes for Work experience starts
+        case 'EDIT_RESUME_DELETE_WORK':
+            let filteredWork = state.work.filter(each => {
+                return each.id !== action.payload.id
+            })
+            state.work= filteredWork
+            return {
+                ...state,
+                resumeReducer: state.work
+            };
+
+// changes for Skills experience starts
+case 'EDIT_RESUME_DELETE_SKILLS':
+    let filteredSkills = state.skills.filter(each => {
+        return each.id !== action.payload.id
+    })
+    state.skills= filteredSkills
+    return {
+        ...state,
+        resumeReducer: state.skills
+    };
+
+
+// changes for work experience ends
+            
         default:
         return resume;
     }

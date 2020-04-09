@@ -1,6 +1,6 @@
 import React from 'react'
 
-export const Experience = (props) => {
+export const Work = (props) => {
     return (
         <div>
             <div key={props.job.company} className="row item">

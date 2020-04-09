@@ -17,3 +17,19 @@ export const editResumeEditSchool = (payload) =>{
     }
 }
 
+// section for work starts here
+export const editResumeDeleteWork = (payload) =>{
+    return {
+        type:"EDIT_RESUME_DELETE_WORK",
+        payload: payload
+    }
+}
+// section for work ends
+
+// section for skills starts
+export const editResumeDeleteSkills = (payload) =>{
+    return {
+        type:"EDIT_RESUME_DELETE_SKILLS",
+        payload: payload
+    }
+}

@@ -4,8 +4,11 @@ import { Card, Nav, Button, } from 'react-bootstrap'
 
 import { useSelector, useDispatch } from "react-redux";
 import { editResumeDeleteSchool, editResumeAddSchool, editResumeEditSchool } from "../../../actions";
+import { editResumeDeleteWork } from "../../../actions";
+import { editResumeDeleteSkills } from "../../../actions";
+
 import { School } from './school.js';
-import { Experience } from './Experience.js';
+import { Work } from './Work.js';
 import { Skills } from './Skills.js';
 import { Switch } from 'react-router';
 import { Link } from 'react-router-dom';
@@ -14,15 +17,28 @@ const Resume = (props) => {
     let education = '';
     let work = '';
     let skills = '';
+
+    //create educations/schools array 
     let educations = props.data.education;
     educations=educations.map((each,index)=> {
         each.index = index;
         return each;
     });
-    const [edu, setEdu] = useState(educations);
-    useEffect(() => {
-        setEdu(educations);
-    }, [])
+    
+    //create work array 
+    let workData = props.data.work;
+    workData=workData.map((each,index)=> {
+        each.index = index;
+        return each;
+    });
+
+    //create skills array 
+    let skillsData = props.data.skills;
+    skillsData=skillsData.map((each,index)=> {
+        each.index = index;
+        return each;
+    });
+
     const dispatch = useDispatch();
     const onChangeTab = (key) =>{
         let eventKey = key.split("-");
@@ -31,7 +47,31 @@ const Resume = (props) => {
                 dispatch(editResumeDeleteSchool(educations[eventKey[1]]));
                 break;
             case "UPDATE":
-                dispatch(editResumeEditSchool(edu));
+                // dispatch(editResumeEditSchool(edu));
+                break;
+            default:
+                break;
+        }
+    }
+    const onChangeTabWork = (key) =>{
+        let eventKey = key.split("-");
+        switch (eventKey[0]) {
+            case "DELETE":
+                dispatch(editResumeDeleteWork(workData[eventKey[1]]));
+                break;
+            case "UPDATE":
+                break;
+            default:
+                break;
+        }
+    }
+    const onChangeTabSkills = (key) =>{
+        let eventKey = key.split("-");
+        switch (eventKey[0]) {
+            case "DELETE":
+                dispatch(editResumeDeleteSkills(skillsData[eventKey[1]]));
+                break;
+            case "UPDATE":
                 break;
             default:
                 break;
@@ -72,13 +112,13 @@ const Resume = (props) => {
 
         });
 
-        work = props.data.work.map(function (job,index) {
+        work = workData.map(function (job,index) {
             let editEventKey = 'EDIT-'+index
             let deleteEventKey = 'DELETE-'+index
             return <div>
                 <Card key={index}>
                         <Card.Header>
-                            <Nav variant="tabs" onSelect={onChangeTab}>
+                            <Nav variant="tabs" onSelect={onChangeTabWork}>
                                 <Nav.Item>
                                     <Link  
                                         to={{
@@ -98,20 +138,20 @@ const Resume = (props) => {
                         </Card.Header>
 
                         <Card.Body>
-                            <Experience job={job} />
+                            <Work job={job} />
                         </Card.Body>
             </Card>
             <br/>
             </div>
         });
 
-        skills = props.data.skills.map(function (skill,index) {
-            let editEventKey = 'EDIT-'+index
-            let deleteEventKey = 'DELETE-'+index
+        skills = skillsData.map(function (skill,index) {
+            let editEventKey = 'EDIT-'+index;
+            let deleteEventKey = 'DELETE-'+index;
             return <div>
                         <Card key={index}>
                             <Card.Header>
-                                <Nav variant="tabs" onSelect={onChangeTab}>
+                                <Nav variant="tabs" onSelect={onChangeTabSkills}>
                                     <Nav.Item>
                                         <Link  
                                             to={{
