@@ -17,27 +17,35 @@ const Resume = (props) => {
     let education = '';
     let work = '';
     let skills = '';
-
-    //create educations/schools array 
     let educations = props.data.education;
-    educations=educations.map((each,index)=> {
-        each.index = index;
-        return each;
+    let workData =props.data.work;
+    let skillsData = props.data.skills;
+    
+    useEffect(() => {
+       //create educations/schools array 
+        educations = props.data.education;
+        educations=educations.map((each,index)=> {
+            each.index = index;
+            return each;
+        });
+        //create work array 
+        workData = props.data.work;
+        workData=workData.map((each,index)=> {
+            each.index = index;
+            return each;
+        });
+
+        //create skills array 
+        skillsData = props.data.skills;
+        skillsData=skillsData.map((each,index)=> {
+            each.index = index;
+            return each;
+        });
+
     });
     
-    //create work array 
-    let workData = props.data.work;
-    workData=workData.map((each,index)=> {
-        each.index = index;
-        return each;
-    });
+    
 
-    //create skills array 
-    let skillsData = props.data.skills;
-    skillsData=skillsData.map((each,index)=> {
-        each.index = index;
-        return each;
-    });
 
     const dispatch = useDispatch();
     const onChangeTab = (key) =>{

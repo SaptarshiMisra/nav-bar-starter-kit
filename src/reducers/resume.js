@@ -40,17 +40,26 @@ const resumeReducer = (state={resume}, action)=>{
                 ...state,
                 resumeReducer: state.work
             };
-
+        case 'EDIT_RESUME_EDIT_WORK':
+            let filteredWorkEdit = state.work.filter(each => {
+                return each.id !== action.payload.id
+            });
+            state.work= filteredWorkEdit
+            state.work.push(action.payload)
+            return {
+                ...state,
+                resumeReducer: state.work
+            };
 // changes for Skills experience starts
-case 'EDIT_RESUME_DELETE_SKILLS':
-    let filteredSkills = state.skills.filter(each => {
-        return each.id !== action.payload.id
-    })
-    state.skills= filteredSkills
-    return {
-        ...state,
-        resumeReducer: state.skills
-    };
+        case 'EDIT_RESUME_DELETE_SKILLS':
+            let filteredSkills = state.skills.filter(each => {
+                return each.id !== action.payload.id
+            })
+            state.skills= filteredSkills
+            return {
+                ...state,
+                resumeReducer: state.skills
+            };
 
 
 // changes for work experience ends
