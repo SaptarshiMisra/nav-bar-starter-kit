@@ -142,4 +142,14 @@
         /* padding-top: 9px; */
         padding-bottom: 2rem;
     }
+    #education-section{
+       display: flex;
+       flex-direction: row;
+       justify-content: right;
+    }
+    #add-education{
+       padding-left: 30px;
+       margin-left:70px;
+       position: relative;
+    }
 }

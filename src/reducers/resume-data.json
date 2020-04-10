@@ -56,12 +56,14 @@
     "resume":{
       "education":[
         {
+          "id":"1",
           "school":"The SFC College of Art",
           "degree":"Bachelor",
           "graduated":"April 2004",
           "description":"Bachelor at the college of Art where I studied a broad aspect of skill sets including Photography and typography."
         },
         {
+          "id":"2",
           "school":"The AB Photography Institute",
           "degree":"Diploma in Photography",
           "graduated":"March 2006",
@@ -70,12 +72,14 @@
       ],
       "work":[
         {
+          "id":"1",
           "company":"Block Media, Paris",
           "title":"Senior Photographer ",
           "years":"March 2009 - present",
           "description":"Senior Photographer undertaking all aspects including strobes , photojournalism, documentary photography, Advanced Photoshop editing, and managed a team of Junior staff in a large commercial studio."
         },
         {
+          "id":"2",
           "company":"Eagle Production, Paris",
           "title":"Junior Photographer",
           "years":"March 2005 - February 2009",
@@ -84,22 +88,27 @@
       ],
       "skills":[
         {
+          "id":"1",
           "name":"Photoshop",
           "level":"40%"
         },
         {
+          "id":"2",
           "name":"Illustrator",
           "level":"25%"
         },
         {
+          "id":"3",
           "name":"Photography",
           "level":"70%"
         },
         {
+          "id":"4",
           "name":"Branding",
           "level":"30%"
         },
         {
+          "id":"5",
           "name":"Education",
           "level":"50%"
         }
