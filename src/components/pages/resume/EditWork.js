@@ -1,5 +1,4 @@
 import React from 'react'
-import { Work } from './Work.js'
 import { editResumeEditWork } from '../../../actions';
 
 import { useEffect, useState } from 'react';
@@ -65,7 +64,6 @@ export const EditWork = (props) => {
                         type="text"
                         onChange={(e) => {
                             setCompany(e.target.value);
-                            // updateSchool();
                         }}
                         placeholder={company} />
                 </Form.Group>

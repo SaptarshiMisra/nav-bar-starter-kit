@@ -39,3 +39,10 @@ export const editResumeDeleteSkills = (payload) =>{
         payload: payload
     }
 }
+
+export const editResumeEditSkills = (payload) =>{
+    return {
+        type:"EDIT_RESUME_EDIT_SKILLS",
+        payload: payload
+    }
+}
