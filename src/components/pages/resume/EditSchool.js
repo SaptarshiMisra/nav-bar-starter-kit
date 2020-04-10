@@ -1,7 +1,6 @@
 import React from 'react'
 import { Redirect } from 'react-router'
-import { School } from './school'
-import {Form, Button} from 'react-bootstrap';
+import {Form} from 'react-bootstrap';
 import {editResumeEditSchool} from '../../../actions';
 import {useEffect,useState} from 'react';
 import {useDispatch} from 'react-redux';
@@ -14,6 +13,7 @@ export const EditSchool = (props) => {
     //     return <Redirect to="/" />
     // }
     const [school,setSchool] = useState('');
+    const [id,setId] = useState('');
     const [degree,setDegree] = useState('');
     const [graduated,setGraduated] = useState('');
     const [description,setDescription] = useState('');
@@ -22,12 +22,14 @@ export const EditSchool = (props) => {
     useEffect(() => {
         if(props.location.education)
         {
+            setId(props.location.education.id)
             setSchool(props.location.education.school)
             setDegree(props.location.education.degree)
             setGraduated(props.location.education.graduated)
             setDescription(props.location.education.description)
 
             let initstate = {
+                id:props.location.education.school.id,
                 school:props.location.education.school,
                 degree:props.location.education.degree,
                 graduated:props.location.education.graduated,
@@ -39,6 +41,7 @@ export const EditSchool = (props) => {
     },[]);
     
     useEffect(() => {
+        editState.id=id
         editState.school = school
         editState.degree = degree
         editState.graduated = graduated

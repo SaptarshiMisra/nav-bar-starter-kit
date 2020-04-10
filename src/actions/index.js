@@ -24,6 +24,12 @@ export const editResumeDeleteWork = (payload) =>{
         payload: payload
     }
 }
+export const editResumeEditWork = (payload) =>{
+    return {
+        type:"EDIT_RESUME_EDIT_WORK",
+        payload: payload
+    }
+}
 // section for work ends
 
 // section for skills starts

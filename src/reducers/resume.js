@@ -22,7 +22,7 @@ const resumeReducer = (state={resume}, action)=>{
             }; 
         case 'EDIT_RESUME_EDIT_SCHOOL':
             let filteredSchoolEdit = state.education.filter(each => {
-                return each.school !== action.payload.school
+                return each.id !== action.payload.id
             })
             state.education= filteredSchoolEdit
             state.education.push(action.payload)
