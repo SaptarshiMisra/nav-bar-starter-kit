@@ -62,7 +62,7 @@ export const EditSkill = (props) => {
                         placeholder={name} />
                 </Form.Group>
                 <Form.Group controlId="formGroupSchoolName">
-                    <Form.Label>Expertise in a scale of 10</Form.Label>
+                    <Form.Label>Expertise out of 100</Form.Label>
                     <Form.Control
                         value={level}
                         type="text"
