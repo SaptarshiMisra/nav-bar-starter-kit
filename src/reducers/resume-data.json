@@ -56,12 +56,14 @@
     "resume":{
       "education":[
         {
+          "id":"1",
           "school":"The SFC College of Art",
           "degree":"Bachelor",
           "graduated":"April 2004",
           "description":"Bachelor at the college of Art where I studied a broad aspect of skill sets including Photography and typography."
         },
         {
+          "id":"2",
           "school":"The AB Photography Institute",
           "degree":"Diploma in Photography",
           "graduated":"March 2006",
