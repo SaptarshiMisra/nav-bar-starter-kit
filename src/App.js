@@ -9,7 +9,7 @@ import Routes from "./Routes";
 import { SidebarMob } from './components/SidebarMob.js';
 
 function App() {
-  let loginState = useSelector(state=> state.loginReducer.user);
+  let loginState = useSelector(state=> state.loginReducer);
   if(loginState)
   {
     loginState = loginState.isAuthenticated;
