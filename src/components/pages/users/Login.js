@@ -15,11 +15,11 @@ export const Login = (props) => {
     const [fbAuthStatus,setFbAuthStatus] = React.useState(false);
     const { history } = props;
 
-    React.useEffect(()=>{
-        if((null !== localStorage.getItem('user') && "undefined" !== localStorage.getItem('user') ) && JSON.parse(localStorage.getItem('user'))){
-            localStorage.clear();
-        }
-    });
+    // React.useEffect(()=>{
+    //     if((null !== localStorage.getItem('user') && "undefined" !== localStorage.getItem('user') ) && JSON.parse(localStorage.getItem('user'))){
+    //         localStorage.clear();
+    //     }
+    // });
 
 
     
