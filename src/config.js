@@ -1,4 +1,4 @@
-import GOOGLE_API_KEY from './ApiKey.js';
+import {GOOGLE_API_KEY} from './ApiKey.js';
 export const APP=
             {
                 name:'Daily Jobs',

@@ -1,12 +1,27 @@
-import React , {useState} from 'react';
+import React , {useState,useEffect} from 'react';
 import { Sidebar } from './components/Sidebar.js';
+import {useSelector,useDispatch} from 'react-redux';
+import {isLogin} from './actions';
+
 import './scss/main.scss';
 import Routes from "./Routes";
 
 import { SidebarMob } from './components/SidebarMob.js';
 
 function App() {
-  const [isAuthenticated, userHasAuthenticated] = useState(false);
+  let loginState = useSelector(state=> state.loginReducer.user);
+  if(loginState)
+  {
+    loginState = loginState.isAuthenticated;
+  }
+  let dispatch = useDispatch();
+  const [isAuthenticated, userHasAuthenticated] = useState(loginState);
+  
+  useEffect(() => {
+    userHasAuthenticated(loginState);
+  });
+
+
   function handleLogout() {
     userHasAuthenticated(false);
   }
