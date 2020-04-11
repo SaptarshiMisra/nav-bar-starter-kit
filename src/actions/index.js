@@ -46,3 +46,16 @@ export const editResumeEditSkills = (payload) =>{
         payload: payload
     }
 }
+
+//login and logout section
+export const isLogin = () =>{
+    return {
+        type:"IS_LOGIN"
+    }
+}
+export const doLogin = (payload) =>{
+    return {
+        type:"DO_LOGIN",
+        payload: payload
+    }
+}
