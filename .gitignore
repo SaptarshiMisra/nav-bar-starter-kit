@@ -13,6 +13,8 @@
 
 #security files
 src/Apikey.js
+src/cognito.js
+
 
 # misc
 .DS_Store
