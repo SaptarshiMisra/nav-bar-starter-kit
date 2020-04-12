@@ -21,7 +21,7 @@ function App() {
     userHasAuthenticated(loginState);
   });
 
-
+  
   function handleLogout() {
     userHasAuthenticated(false);
   }

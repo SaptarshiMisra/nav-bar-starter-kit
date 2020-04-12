@@ -44,7 +44,7 @@ export const Header = () => {
                     <a href="#"> 
                         {/* <div className="user-img "></div> */}
                         <div className="dropdown">
-                        <Button className="dropbtn">{userState.name.split(' ')[0]} 
+                        <Button className="dropbtn">Sapta
                             <i className="fa fa-caret-down"></i>
                         </Button>
                         <div className="dropdown-content">

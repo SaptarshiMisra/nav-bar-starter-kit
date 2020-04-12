@@ -1,5 +1,4 @@
-import React from 'react';
-import FacebookLogin from 'react-facebook-login/dist/facebook-login-render-props'
+import React, {useState} from 'react';
 import {isLogin, doLogin} from '../../../actions';
 import {  useDispatch } from "react-redux";
 import { Redirect } from 'react-router';
@@ -9,31 +8,68 @@ import '@fortawesome/fontawesome-free/css/all.min.css';
 import 'bootstrap-css-only/css/bootstrap.min.css';
 import 'mdbreact/dist/css/mdb.css';
 import { FB_APP_ID } from './../../../ApiKey';
+import { useFormFields } from "./../../../libs/hooksLib";
+import { onError } from "./../../../libs/errorLib";
+import { Auth } from "aws-amplify";
+import {
+  FormText,
+  FormGroup,
+  FormControl,
+  FormLabel
+} from "react-bootstrap";
+import LoaderButton from "./../../LoaderButton";
+
+
 
 export const Login = (props) => {
     const [user,setUser] = React.useState({});
     const [fbAuthStatus,setFbAuthStatus] = React.useState(false);
     const { history } = props;
-
-    // React.useEffect(()=>{
-    //     if((null !== localStorage.getItem('user') && "undefined" !== localStorage.getItem('user') ) && JSON.parse(localStorage.getItem('user'))){
-    //         localStorage.clear();
-    //     }
-    // });
-
-
-    
+    const [fields, handleFieldChange] = useFormFields({
+      email: "",
+      password: ""
+    });
+    function validateForm() {
+      return fields.email.length > 0 && fields.password.length > 0;
+    }
+    const [isLoading, setIsLoading] = useState(false);
+    async function handleSubmit(event) {
+      event.preventDefault();
+  
+      setIsLoading(true);
+  
+      try {
+        await Auth.signIn(fields.email, fields.password);
+        let user = Auth.currentAuthenticatedUser({
+          bypassCache:false
+        });
+        dispatch(doLogin(user));
+        history.push('/');
+        // userHasAuthenticated(true);
+      } catch (e) {
+        onError(e);
+        setIsLoading(false);
+      }
+    }
+    const handleFbLogin = async (event) =>{
+      console.log(event)
+      let response = null;
+      try{
+        await Auth.federatedSignIn({provider:'Facebook'});
+      }catch(e){
+        onError(`Error occured in facebook login {e}`);
+        console.log(e);
+      }
+      console.log(`facebook response {response}`);
+      let user = await Auth.currentAuthenticatedUser({
+        bypassCache:false
+      });
+      dispatch(doLogin(user));
+      history.push('/');
+    }
     let dispatch = useDispatch();
     const responseFacebook = (response) => {
         console.log(response);
-        // if(response.name){
-        //     setFbAuthStatus(true);
-        // }
-        // setUser(response);
-        // dispatch(doLogin());
-
-        // props.userHasAuthenticated(true);
-        // return responseFacebookRedirect(response);
      }
      const responseFacebookRedirect = (response) =>{
         console.log(response);
@@ -41,12 +77,8 @@ export const Login = (props) => {
             setFbAuthStatus(true);
         }
         localStorage.clear();
-        // localStorage.setItem('user',JSON.stringify(response));
-        // localStorage.setItem('isAuthenticated',true);
         dispatch(doLogin(response));
-        history.push('/');
-        // props.userHasAuthenticated(true);
-        
+        history.push('/');        
      }
      if(fbAuthStatus){
         return  <Redirect to="/" />
@@ -63,64 +95,81 @@ export const Login = (props) => {
                         <strong>Sign in</strong>
                         </h3>
                     </div>
-                    <MDBInput
-                        label="Your email"
-                        group
-                        type="email"
-                        validate
-                        error="wrong"
-                        success="right"
-                    />
-                    <MDBInput
-                        label="Your password"
-                        group
-                        type="password"
-                        validate
-                        containerClass="mb-0"
-                    />
-                    <p className="font-small blue-text d-flex justify-content-end pb-3">
-                        Forgot
-                        <a href="#!" className="blue-text ml-1">
+                    <form onSubmit={handleSubmit}>
+                      <FormGroup controlId="email" bsSize="large">
+                        <FormLabel>Email</FormLabel>
+                        <FormControl
+                          autoFocus
+                          type="email"
+                          value={fields.email}
+                          onChange={handleFieldChange}
+                        />
+                      </FormGroup>
+                      <FormGroup controlId="password" bsSize="large">
+                        <FormLabel>Password</FormLabel>
+                        <FormControl
+                          type="password"
+                          value={fields.password}
+                          onChange={handleFieldChange}
+                        />
+                      </FormGroup>
+                      <p className="font-small blue-text d-flex justify-content-end pb-3">
+                          Forgot
+                          <a href="#!" className="blue-text ml-1">
 
-                        Password?
-                        </a>
-                    </p>
-                    <div className="text-center mb-3">
-                        <MDBBtn
-                        type="button"
-                        gradient="blue"
-                        rounded
-                        className="btn-block z-depth-1a"
+                          Password?
+                          </a>
+                      </p>
+                      <div className="text-center mb-3">
+                        <LoaderButton
+                          block
+                          type="submit"
+                          bsSize="large"
+                          isLoading={isLoading}
+                          disabled={!validateForm()}
                         >
-                        Sign in
-                        </MDBBtn>
-                    </div>
+                          Login
+                        </LoaderButton>
+                      </div>
+                    </form>
                     <p className="font-small dark-grey-text text-right d-flex justify-content-center mb-3 pt-2">
 
                         or Sign in with:
                     </p>
                     <div className="row my-3 d-flex justify-content-center">
                 
-                <FacebookLogin
-                    appId={FB_APP_ID}
-                    autoLoad={false}
-                    textButton="Facebook"
-                    fields="name,email,picture"
-                    onClick={responseFacebook}
-                    callback = {responseFacebookRedirect}
-                    render={renderProps => (
-                        <MDBBtn
-                            type="button"
-                            color="white"
-                            rounded
-                            className="mr-md-3 z-depth-1a"
-                            // onIconClick={renderProps.onClick}
-                            onClick={renderProps.onClick}
-                            >
-                                <MDBIcon fab icon="facebook-f" className="blue-text text-center" />
-                            </MDBBtn>
-                      )}
-                />
+                    {/* <FacebookLogin
+                        appId={FB_APP_ID}
+                        autoLoad={false}
+                        textButton="Facebook"
+                        fields="name,email,picture"
+                        onClick={responseFacebook}
+                        callback = {responseFacebookRedirect}
+                        render={renderProps => (
+                            <MDBBtn
+                                type="button"
+                                color="white"
+                                rounded
+                                className="mr-md-3 z-depth-1a"
+                                // onIconClick={renderProps.onClick}
+                                onClick={renderProps.onClick}
+                                >
+                                    <MDBIcon fab icon="facebook-f" className="blue-text text-center" />
+                                </MDBBtn>
+                          )}
+                    /> */}
+                    <MDBBtn
+                      type="button"
+                      color="white"
+                      rounded
+                      className="mr-md-3 z-depth-1a"
+                      onClick={handleFbLogin}
+                      >
+                      <MDBIcon fab icon="facebook-f" className="blue-text text-center" />
+                    </MDBBtn>
+                    {/* <FacebookButton
+                      onLogin={handleFbLogin}
+                    />     */}
                 <MDBBtn
                   type="button"
                   color="white"
@@ -142,7 +191,7 @@ export const Login = (props) => {
             <MDBModalFooter className="mx-5 pt-3 mb-1">
               <p className="font-small grey-text d-flex justify-content-end">
                 Not a member?
-                <a href="#!" className="blue-text ml-1">
+                <a href="/signup" className="blue-text ml-1">
 
                   Sign Up
                 </a>

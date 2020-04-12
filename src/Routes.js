@@ -9,6 +9,7 @@ import {EditSchool} from "./components/pages/resume/EditSchool.js";
 import {EditWork} from "./components/pages/resume/EditWork.js";
 import {EditSkill} from "./components/pages/resume/EditSkill.js";
 import {Login} from './components/pages/users/Login.js';
+import {Signup} from './components/pages/users/Signup.js';
 import PublicRoute from "./components/PublicRoute";
 
 export default function Routes({ appProps }) {
@@ -16,6 +17,7 @@ export default function Routes({ appProps }) {
       <Switch>
         <AppliedRoute path="/" exact component={HomePage} appProps={appProps} />
         <PublicRoute path="/login" exact component={Login} appProps={appProps} />
+        <PublicRoute path="/signup" exact component={Signup} appProps={appProps} />
         <AppliedRoute path="/Home" exact component={HomePage} appProps={appProps} />
         <AppliedRoute path="/apply" exact component={ApplyJob} appProps={appProps} />
         

@@ -1,3 +1,5 @@
+import Amplify, { Auth, Hub } from 'aws-amplify';
+
 let isAuthenticated = false;
 const loginReducer = (state={isAuthenticated}, action)=>{
 
