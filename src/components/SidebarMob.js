@@ -56,7 +56,7 @@ export const SidebarMob = (props) => {
                 <div className="line"></div>
                 <div className="line"></div>
             </div>
-            <MenuMob open={open} {...props}/>
+            <MenuMob open={open} setOpen={setOpen} {...props}/>
         </nav>
     )
 }
