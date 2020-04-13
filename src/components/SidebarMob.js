@@ -4,7 +4,7 @@ import {AppTitle} from './AppTitle.js'
 import {MenuMob} from './MenuMob.js';
 
 
-export const SidebarMob = () => {
+export const SidebarMob = (props) => {
     const [open, setOpen] = useState(false);
     const [animStyle, setAnimStyle] = useState({});
     useEffect(() => {
@@ -56,7 +56,7 @@ export const SidebarMob = () => {
                 <div className="line"></div>
                 <div className="line"></div>
             </div>
-            <MenuMob open={open}/>
+            <MenuMob open={open} {...props}/>
         </nav>
     )
 }

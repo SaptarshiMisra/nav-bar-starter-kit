@@ -11,13 +11,21 @@ const loginReducer = (state={isAuthenticated}, action)=>{
             };
         case 'DO_LOGIN':
             isAuthenticated = true;
-            localStorage.clear();
-            localStorage.setItem('user',JSON.stringify(action.payload));
-            localStorage.setItem('isAuthenticated',true);
             return {
                 ...state,
                 isAuthenticated: isAuthenticated,
+            };
+        case 'DO_LOGIN_GET_USER':
+            return {
+                ...state,
                 user:action.payload
+            };
+        case 'DO_LOGIN_ERROR':
+            
+            return {
+                ...state,
+                isAuthenticated: false,
+                error: action.payload
             };
         case 'DO_LOGOUT':
         isAuthenticated = false;
