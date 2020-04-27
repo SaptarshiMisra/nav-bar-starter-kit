@@ -8,19 +8,24 @@ import Routes from "./Routes";
 
 import { SidebarMob } from './components/SidebarMob.js';
 
-function App() {
-  let loginState = useSelector(state=> state.loginReducer);
-  if(loginState)
-  {
-    loginState = loginState.isAuthenticated;
-  }
-  let dispatch = useDispatch();
-  const [isAuthenticated, userHasAuthenticated] = useState(loginState);
-  
-  useEffect(() => {
-    userHasAuthenticated(loginState);
-  });
+import {getLoginUser} from './actions/GetLoginUser';
 
+function App() {
+
+  const [isAuthenticated, userHasAuthenticated] = useState(false);
+  const [user,setUser] = useState({});
+  const dispatch = useDispatch();
+  let userState = useSelector(state=>state.loginReducer);
+  useEffect(() => {
+      let usr = dispatch(getLoginUser());
+      setUser(usr);
+
+      if(usr)
+      {
+        userHasAuthenticated(true);
+      }
+  },[]);
+  
   
   function handleLogout() {
     userHasAuthenticated(false);
@@ -31,15 +36,15 @@ function App() {
       <div id="deskTopView">
         <div class="row">
           <div  id="sideBar" class="col col-sm-1 col-md-6 col-lg-3 ">
-            <Sidebar />
+            <Sidebar appProps={{ isAuthenticated, userHasAuthenticated,user }} />
           </div>
           <div class="col-sm-11 col-md-6 col-lg-9">
-            <Routes appProps={{ isAuthenticated, userHasAuthenticated }} />
+            <Routes appProps={{ isAuthenticated, userHasAuthenticated,user }} />
           </div>
         </div>
       </div>
         <div id="mobView">
-            <SidebarMob />
+            <SidebarMob appProps={{ isAuthenticated, userHasAuthenticated,user }}/>
               <div className="content-area">
                 <Routes appProps={{ isAuthenticated, userHasAuthenticated }} />
               </div>

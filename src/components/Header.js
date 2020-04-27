@@ -1,19 +1,17 @@
-import React,{useState} from 'react';
-import {useSelector} from 'react-redux';
+import React,{useState,useEffect} from 'react';
+import {useSelector, useDispatch} from 'react-redux';
 import {Button} from 'react-bootstrap';
-
+import {getLoginUser} from './../actions/GetLoginUser';
 import '../scss/header.scss';
 
 export const Header = () => {
-    // constructor(props) {
-    //     super(props)
-    //     this.state = {
-    //         value: 'SEARCH HERE'
-    //     }
-    //     this.handleChange = this.handleChange.bind(this),
-    //     this.profilePic = '' 
-    // }
+    
     const[value, setValue] = useState('');
+    const dispatch = useDispatch();
+    let userState = useSelector(state=>state.loginReducer.user);
+    useEffect(() => {
+        dispatch(getLoginUser());
+    },[]);
 
     const handleChange = (e) => {
         setValue( e.target.value );
@@ -24,7 +22,7 @@ export const Header = () => {
         this.myinput.dispatchEvent(event);
     }
 
-    let userState = useSelector(state=>state.loginReducer.user);
+    
     console.log(userState)
     // render() {
 
@@ -44,7 +42,7 @@ export const Header = () => {
                     <a href="#"> 
                         {/* <div className="user-img "></div> */}
                         <div className="dropdown">
-                        <Button className="dropbtn">Sapta
+                        <Button className="dropbtn">{userState ? userState.attributes.email.split('@')[0] : ''}
                             <i className="fa fa-caret-down"></i>
                         </Button>
                         <div className="dropdown-content">
