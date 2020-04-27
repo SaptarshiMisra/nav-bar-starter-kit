@@ -7,19 +7,14 @@ import 'bootstrap/dist/css/bootstrap.min.css';
 import { BrowserRouter as Router } from 'react-router-dom';
 
 import { Provider } from 'react-redux';
-import { createStore,applyMiddleware,compose } from 'redux';
-import thunk from 'redux-thunk';
-
+import { createStore } from 'redux';
 import allReducers from './reducers';
 
 import { Amplify } from 'aws-amplify';
 import {AWS} from './config';
 
-const middlewares = [thunk];
-const composeEnhancers = window.__REDUX_DEVTOOLS_EXTENSION_COMPOSE__ || compose;
-const store = createStore(allReducers,composeEnhancers(applyMiddleware(...middlewares))
-  // window.__REDUX_DEVTOOLS_EXTENSION__ && window.__REDUX_DEVTOOLS_EXTENSION__()
-  );
+
+const store = createStore(allReducers,window.__REDUX_DEVTOOLS_EXTENSION__ && window.__REDUX_DEVTOOLS_EXTENSION__());
 
 
 Amplify.configure({
