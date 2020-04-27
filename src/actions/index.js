@@ -53,20 +53,9 @@ export const isLogin = () =>{
         type:"IS_LOGIN"
     }
 }
-export const doLogin = () =>{
+export const doLogin = (payload) =>{
     return {
-        type:"DO_LOGIN"
-    }
-}
-export const doLoginGetUser = (payload) =>{
-    return {
-        type:"DO_LOGIN_GET_USER",
-        payload: payload
-    }
-}
-export const doLoginError = (payload) =>{
-    return {
-        type:"DO_LOGIN_ERROR",
+        type:"DO_LOGIN",
         payload: payload
     }
 }

@@ -1,5 +1,5 @@
 import React, {useState} from 'react';
-import {isLogin, doLogin,doLoginError} from '../../../actions';
+import {isLogin, doLogin} from '../../../actions';
 import {  useDispatch } from "react-redux";
 import { Redirect } from 'react-router';
 import { MDBContainer, MDBRow, MDBCol, MDBCard, MDBCardBody, MDBInput, MDBBtn, MDBIcon, MDBModalFooter } from 'mdbreact';
@@ -40,15 +40,14 @@ export const Login = (props) => {
   
       try {
         await Auth.signIn(fields.email, fields.password);
-        let user =await Auth.currentAuthenticatedUser({
+        let user = Auth.currentAuthenticatedUser({
           bypassCache:false
         });
-        dispatch(doLogin());
-        props.userHasAuthenticated(true);
+        dispatch(doLogin(user));
         history.push('/');
+        // userHasAuthenticated(true);
       } catch (e) {
         onError(e);
-        dispatch(doLoginError(e));
         setIsLoading(false);
       }
     }
@@ -58,7 +57,6 @@ export const Login = (props) => {
       try{
         await Auth.federatedSignIn({provider:'Facebook'});
       }catch(e){
-        dispatch(doLogin(user));
         onError(`Error occured in facebook login {e}`);
         console.log(e);
       }
@@ -66,7 +64,7 @@ export const Login = (props) => {
       let user = await Auth.currentAuthenticatedUser({
         bypassCache:false
       });
-      // dispatch(doLogin(user));
+      dispatch(doLogin(user));
       history.push('/');
     }
     let dispatch = useDispatch();
